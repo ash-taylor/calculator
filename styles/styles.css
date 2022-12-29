@@ -1,3 +1,31 @@
 * {
     font-family: Arial, Helvetica, sans-serif;
 }
+
+body {
+    background-color:antiquewhite;
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.calculator-main {
+    display: flex;
+    flex-direction: column;
+    background-color: #435861;
+    border: solid 1px black;
+    border-radius: 10px;
+    padding: 15px;
+    height: 550px;
+    width: 400px;
+}
+
+.calculator-screen {
+    background-color: #FBF6F9;
+    border-radius: 7px;
+    height: 150px;
+    max-width: 100%;
+}
