@@ -26,10 +26,27 @@ body {
 }
 
 .calculator-screen {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
     background-color: #FBF6F9;
     border-radius: 7px;
-    height: 130px;
+    min-height: 100%;
     max-width: 100%;
+}
+
+.top-screen {
+    padding: 15px;
+    font-size: 2em;
+    padding-bottom: 0;
+}
+
+.lower-screen {
+    padding-top: 0;
+    padding: 15px;
+    font-weight:bold;
+    font-size: 3em;
 }
 
 .calculator-buttons {
