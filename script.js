@@ -84,6 +84,10 @@ function operate(x, op, y) {
         values = [x, y];
         return multiply(values);
       case '÷':
+        if (x === 0 && y === 0) {
+          alert("You cannot divide 0 by 0!");
+          return 0;
+        }
         return divide(x, y);
     }
   }
