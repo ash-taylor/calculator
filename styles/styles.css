@@ -71,6 +71,14 @@ button {
     padding: 25px;
 }
 
+button.op-button {
+    background-color: rgba(222, 184, 135, 85%);
+}
+
+button:hover {
+    background-color: rgba(222, 184, 135, 50%);
+}
+
 #clear {
     grid-column: 1 / 3;
 } 
