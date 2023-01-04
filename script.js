@@ -1,62 +1,106 @@
-const operators = ['add', 'subtract', 'multiply', 'divide']
+const operators = ['+', '-', 'x', '÷']
 
 const add = (a, b) => a + b;
 const subtract = (a, b) => a - b;
-const multiply = array => array.length ? array.reduce((total, item) => total * item) : 0; // Adds ternary to test for empty array - if no array, returns 0
+const multiply = array => array.length ? array.reduce((total, item) => total * item) : 0; 
 const divide = (a, b) => a / b;
 
-let opFlag = false;
-let lowerValue = "";
-let operator = "";
-let x = 0;
-let y = 0;
-let result = 0;
-
-const topScreen = document.querySelector('.top-screen');
+const upperScreen = document.querySelector('.top-screen');
 const lowerScreen = document.querySelector('.lower-screen');
+
+let x = 0;
+let y;
+let result;
+let operator = "";
+let lowerValue = "0";
+let upperValue = "";
+let calcStatus = false;
+let decStatus = false;
+
 const numbers = document.querySelectorAll('.number-button');
 numbers.forEach((number) => {
   number.addEventListener('click', () => {
-    lowerValue += number.id;
-    lowerScreen.innerHTML = lowerValue;
+    if (number.id === "." && decStatus) return;
+    if (number.id === ".") decStatus = true;
+    if (number.id === "delete") {
+      lowerScreen.innerHTML = lowerScreen.innerHTML.slice(0, -1);
+      lowerValue = lowerScreen.innerHTML;
+    }
+    else {
+      lowerValue === "0" ? lowerValue = number.id : lowerValue += number.id;
+      lowerScreen.innerHTML = lowerValue;
+    }
   })
 })
 
 const opButtons = document.querySelectorAll('.op-button');
 opButtons.forEach((opButton) => {
   opButton.addEventListener('click', () => {
-    if (!opFlag) {
-      topScreen.innerHTML = lowerValue + " " + opButton.innerHTML;
-      operator = opButton.id;
-      console.log(operator);
-      opFlag = true;
+    if (opButton.id === "clear") clear();
+    // if (!lowerValue) return;
+    else if (!calcStatus) {
+      if (opButton.id === "=") return;
       x = parseFloat(lowerValue);
-      lowerValue = "";
+      if (isNaN(x)) return;
+      operator = opButton.id;
+      upperValue = `${x} ${operator}`;
+      upperScreen.innerHTML = upperValue;
+      lowerValue = "0";
+      calcStatus = true;
+      decStatus = false;
     }
-    else {
+    else if (calcStatus && operators.includes(opButton.id) && operator !== "=") {
       y = parseFloat(lowerValue);
+      if (isNaN(y)) return;
+      x = operate(x, operator, y);
+      operator = opButton.id;
+      upperScreen.innerHTML = `${x} ${operator}`;
+      lowerScreen.innerHTML = `${x}`;
+      lowerValue = "0";
+      decStatus = false;
+    }
+    else if (opButton.id === "=") {
+      y = parseFloat(lowerValue);
+      if (isNaN(y)) return;
+      upperScreen.innerHTML = `${x} ${operator} ${y} ${opButton.id}`;
       result = operate(x, operator, y);
-      console.log(result);
-      lowerScreen.innerHTML = result;
+      lowerScreen.innerHTML = `${result}`;
+      lowerValue = result;
+      calcStatus = false;
+      decStatus = false;
     }
   })
 })
 
 function operate(x, op, y) {
   if (operators.includes(op)) {
+    opStatus = true;
     switch(op) {
-      case 'add':
+      case '+':
         return add(x, y);
-      case 'subtract':
+      case '-':
         return subtract(x, y);
-      case 'multiply':
+      case 'x':
         values = [x, y];
         return multiply(values);
-      case 'divide':
+      case '÷':
         return divide(x, y);
     }
   }
   else {
     return;
   }
+}
+
+function clear() {
+  x = 0;
+  y = undefined;
+  operator = "";
+  result = undefined;
+  calcStatus = false;
+  decStatus = false;
+  lowerValue = "0";
+  upperValue = "";
+  lowerScreen.innerHTML = "0";
+  upperScreen.innerHTML = "";
 }
