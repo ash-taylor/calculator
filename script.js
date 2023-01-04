@@ -12,7 +12,7 @@ let x = 0;
 let y;
 let result;
 let operator = "";
-let lowerValue = "0";
+let lowerValue = "";
 let upperValue = "";
 let calcStatus = false;
 let decStatus = false;
@@ -45,7 +45,7 @@ opButtons.forEach((opButton) => {
       operator = opButton.id;
       upperValue = `${x} ${operator}`;
       upperScreen.innerHTML = upperValue;
-      lowerValue = "0";
+      lowerValue = "";
       calcStatus = true;
       decStatus = false;
     }
@@ -56,7 +56,7 @@ opButtons.forEach((opButton) => {
       operator = opButton.id;
       upperScreen.innerHTML = `${x} ${operator}`;
       lowerScreen.innerHTML = `${x}`;
-      lowerValue = "0";
+      lowerValue = "";
       decStatus = false;
     }
     else if (opButton.id === "=") {
@@ -103,7 +103,7 @@ function clear() {
   result = undefined;
   calcStatus = false;
   decStatus = false;
-  lowerValue = "0";
+  lowerValue = "";
   upperValue = "";
   lowerScreen.innerHTML = "0";
   upperScreen.innerHTML = "";
