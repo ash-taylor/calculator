@@ -8,6 +8,7 @@ body {
     margin: 0;
     min-height: 100vh;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 }
@@ -23,6 +24,7 @@ body {
     padding: 15px;
     min-height: 600px;
     min-width: 400px;
+    margin: auto;
 }
 
 .calculator-screen {
@@ -75,4 +77,12 @@ button {
 
 #delete {
     grid-column: 3 / 5;
+}
+
+footer {
+    max-width: 100%;
+    padding: 20px;
+    margin-top: auto;
+    display: flex;
+    justify-content: center;
 }
