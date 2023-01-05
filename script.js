@@ -37,7 +37,6 @@ const opButtons = document.querySelectorAll('.op-button');
 opButtons.forEach((opButton) => {
   opButton.addEventListener('click', () => {
     if (opButton.id === "clear") clear();
-    // if (!lowerValue) return;
     else if (!calcStatus) {
       if (opButton.id === "=") return;
       x = parseFloat(lowerValue);
