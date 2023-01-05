@@ -11,6 +11,7 @@ const lowerScreen = document.querySelector('.lower-screen');
 let x = 0;
 let y;
 let result;
+let equals = false;
 let operator = "";
 let lowerValue = "";
 let upperValue = "";
@@ -20,6 +21,12 @@ let decStatus = false;
 const numbers = document.querySelectorAll('.number-button');
 numbers.forEach((number) => {
   number.addEventListener('click', () => {
+    if (equals) {
+      equals = false;
+      lowerScreen.innerHTML = "";
+      lowerValue = "";
+      upperScreen.innerHTML = "";
+    }
     if (number.id === "." && decStatus) return;
     if (number.id === ".") decStatus = true;
     if (number.id === "delete") {
@@ -36,6 +43,7 @@ numbers.forEach((number) => {
 const opButtons = document.querySelectorAll('.op-button');
 opButtons.forEach((opButton) => {
   opButton.addEventListener('click', () => {
+    if (equals) equals = false;
     if (opButton.id === "clear") clear();
     else if (!calcStatus) {
       if (opButton.id === "=") return;
@@ -63,6 +71,7 @@ opButtons.forEach((opButton) => {
       upperScreen.innerHTML = `${x} ${operator} ${y} ${opButton.id}`;
       result = operate(x, operator, y);
       lowerScreen.innerHTML = `${result}`;
+      equals = true;
       lowerValue = result;
       calcStatus = false;
       decStatus = false;
@@ -99,6 +108,7 @@ function clear() {
   y = undefined;
   operator = "";
   result = undefined;
+  equals = false;
   calcStatus = false;
   decStatus = false;
   lowerValue = "";
