@@ -50,8 +50,7 @@ opButtons.forEach((opButton) => {
     }
     else if (calcStatus && operators.includes(opButton.id) && operator !== "=") {
       y = parseFloat(lowerValue);
-      if (isNaN(y)) return;
-      x = operate(x, operator, y);
+      if (!isNaN(y)) x = operate(x, operator, y);
       operator = opButton.id;
       upperScreen.innerHTML = `${x} ${operator}`;
       lowerScreen.innerHTML = `${x}`;
